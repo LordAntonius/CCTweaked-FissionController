@@ -6,6 +6,7 @@ local sendChan = 21
 -- Code
 local modem = peripheral.find("modem")
 local monitor = peripheral.find("monitor")
+monitor.setTextScale(0.5)
 local mymath = require("mymath")
 modem.open(recvChan)
 
@@ -24,26 +25,35 @@ while true do
 
     if message.status then
         monitor.setTextColor(colors.green)
-        monitor.write("Reactor Activated\n")
+        monitor.setCursorPos(1,1)
+        monitor.write("Activated")
         monitor.setTextColor(colors.white)
-        monitor.write("Fuel: " .. message.fuel .. " B\n")
-        monitor.write("Coolant: " .. message.coolant .. " B\n")
-        monitor.write("Temp: " .. message.temp .. " K\n")
-        monitor.write("Waste: " .. message.waste .. " mB\n")
+        monitor.setCursorPos(1,2)
+        monitor.write("Fuel:" .. message.fuel .. "B")
+        monitor.setCursorPos(1,3)
+        monitor.write("Cool: " .. message.coolant .. "B")
+        monitor.setCursorPos(1,4)
+        monitor.write("Temp: " .. message.temp .. "K")
+        monitor.setCursorPos(1,5)
+        monitor.write("Wast: " .. message.waste .. "mB")
     else
         monitor.setTextColor(colors.red)
-        monitor.write("Reactor Deactivated\n")
+        monitor.setCursorPos(1,1)
+        monitor.write("Reactor Deactivated")
         monitor.setBackgroundColor(colors.red)
         monitor.setTextColor(colors.white)
-        monitor.write("CLICK TO STOP\nALARM")
+        monitor.setCursorPos(1,2)
+        monitor.write("CLICK TO STOP")
+        monitor.setCursorPos(1,3)
+        monitor.wrtie("ALARM")
 
         redstone.setOutput(redstoneSide, 15)
         repeat
             event, button, x, y = os.pullEvent("monitor_touch")
         until y > 0
         redstone.setOutput(redstoneSide, 0)
+        monitor.setBackgroundColor(colors.black)
     end
 
 
-    sleep(1)
 end
