@@ -1,12 +1,12 @@
 -- Config
 local reactorSide = "bottom"
 local wasteLimit = 10
-local tempLimit = 400
+local tempLimit = 600
 
 local reactor = peripheral.wrap(reactorSide)
 
 while true do
-    if reactor.getWasteFilledPercentage() > wasteLimit then
+    if reactor.getWaste() > wasteLimit then
         reactor.scram()
         print("Too much waste ! ABORT SYSTEM")
     end
