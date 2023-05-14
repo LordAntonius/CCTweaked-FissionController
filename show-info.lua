@@ -29,7 +29,7 @@ while true do
         monitor.write("Activated")
         monitor.setTextColor(colors.white)
         monitor.setCursorPos(1,2)
-        monitor.write("Fuel:" .. message.fuel .. "B")
+        monitor.write("Fuel: " .. message.fuel .. "B")
         monitor.setCursorPos(1,3)
         monitor.write("Cool: " .. message.coolant .. "B")
         monitor.setCursorPos(1,4)
@@ -45,13 +45,13 @@ while true do
         monitor.setCursorPos(1,2)
         monitor.write("CLICK TO STOP")
         monitor.setCursorPos(1,3)
-        monitor.wrtie("ALARM")
+        monitor.write("ALARM")
 
-        redstone.setOutput(redstoneSide, 15)
+        redstone.setOutput(redstoneSide, true)
         repeat
             event, button, x, y = os.pullEvent("monitor_touch")
         until y > 0
-        redstone.setOutput(redstoneSide, 0)
+        redstone.setOutput(redstoneSide, false)
         monitor.setBackgroundColor(colors.black)
     end
 
