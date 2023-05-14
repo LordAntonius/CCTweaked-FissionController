@@ -6,13 +6,15 @@ local tempLimit = 600
 local reactor = peripheral.wrap(reactorSide)
 
 while true do
-    if reactor.getWaste() > wasteLimit then
-        reactor.scram()
-        print("Too much waste ! ABORT SYSTEM")
-    end
-    if reactor.getTemperature() > tempLimit then
-        reactor.scram()
-        print("Not enough coolant ! ABORT SYSTEM")
+    if reactor.getStatus() then
+        if reactor.getWaste().amount > wasteLimit then
+            reactor.scram()
+            print("Too much waste ! ABORT SYSTEM")
+        end
+        if reactor.getTemperature() > tempLimit then
+            reactor.scram()
+            print("Not enough coolant ! ABORT SYSTEM")
+        end
     end
     sleep(1)
 end
